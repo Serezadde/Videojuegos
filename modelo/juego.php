@@ -60,9 +60,11 @@ class Juego
     function obtenerListadoJuegos($filtro = null, $orden = null)
     {
         try {
+            $querySelect = "CALL sp_videojuegos_juegos_seleccion();";
+            $listaJuegos = $this->db->prepare($querySelect);
 
-            $listaJuegos = $this->obtenerRegistrosJuegos($filtro, $orden);
 
+            $listaJuegos->execute();
             if ($listaJuegos) {
 
                 foreach ($listaJuegos as &$juego) {

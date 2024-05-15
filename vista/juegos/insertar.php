@@ -47,7 +47,7 @@ include "../../componentes/head.php";
                 <button type="submit" class="btn btn-primary">Crear Juego</button>
             </form>
             <br>
-            <a href="vista/juegos/listar.php"><button>Volver a Juegos</button></a>
+            <a href="../../vista/juegos/listar.php"><button>Volver a Juegos</button></a>
         </div>
     </div>
 </body>
