@@ -39,8 +39,7 @@ class Juego
 
     private function obtenerNombresPlataformas($idJuego)
     {
-        $querySelect = "SELECT DISTINCT nombre FROM plataformas WHERE plataformas.id IN        
-            (SELECT juegos_plataformas.id_plataforma FROM juegos_plataformas WHERE id_juego = :idJuego)";
+        $querySelect = "CALL sp_videojuegos_juegos_obtener_nombre_plataforma()";
 
         $listaPlataformas = $this->db->prepare($querySelect);
 
@@ -57,7 +56,7 @@ class Juego
         return $nombrePlataformas;
     }
 
-    function obtenerListadoJuegos($filtro = null, $orden = null)
+    function obtenerListadoJuegos()
     {
         try {
             $querySelect = "CALL sp_videojuegos_juegos_seleccion();";
@@ -67,7 +66,7 @@ class Juego
             $listaJuegos->execute();
             if ($listaJuegos) {
 
-                foreach ($listaJuegos as &$juego) {
+                foreach ($listaJuegos as $juego) {
                     $juego->plataformas = $this->obtenerNombresPlataformas($juego->id);
                 }
 
