@@ -39,8 +39,7 @@ class Plataforma
     function insertarPlataforma()
     {
         try {
-            $queryInsertar = "INSERT INTO plataformas (nombre, descripcion, disponible, imagen)
-                                 VALUES (:nombre, :descripcion, :disponible, :imagen)";
+            $queryInsertar = "CALL sp_videojuegos_plataforma_insertar(:nombre, :descripcion, :disponible, :imagen, @id)";
             
             $instanciaDB = $this->db->prepare($queryInsertar);
 
@@ -108,7 +107,7 @@ class Plataforma
                 }
             }
             // Se deben eliminar la plataforma seleccionada
-            $queryBorrarPlataforma = "DELETE FROM plataformas WHERE id=$this->id";
+            $queryBorrarPlataforma = "CALL sp_videojuegos_plataforma_eliminar()";
             $respuestaBorrar = $this->db->query($queryBorrarPlataforma);
 
             if ($respuestaBorrar) {
@@ -148,10 +147,7 @@ class Plataforma
     function actualizarPlataforma()
     {
         try {
-            $queryUpdate = "UPDATE plataformas SET nombre = :nombre, 
-                                    descripcion = :descripcion,
-                                    imagen = :imagen,
-                                    disponible = :disponible WHERE id = :idPlataforma";
+            $queryUpdate = "";
 
             $instanciaDB = $this->db->prepare($queryUpdate);
 
