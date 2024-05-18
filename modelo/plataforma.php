@@ -132,7 +132,7 @@ class Plataforma
 
         // Si todo fue exitoso, confirmamos la transacción
         $this->db->commit();
-        header("Location: borrar.php");
+        header("Location: listar.php");
 
     } catch (Exception $ex) {
         // Si hay un error, realizamos rollback solo si hay una transacción activa
