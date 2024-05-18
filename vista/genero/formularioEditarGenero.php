@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Editar Género</title>
-</head>
+
+<?php
+include "../../componentes/head.php";
+?>
+
 <body>
-    <h2>Editar Género</h2>
-    <?php
-    require_once "../../controlador/genero/EditarGeneroController.php";
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h1>Editar Genero: </h1>
+            <br>
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET["id"])) {
-        $idGenero = $_GET["id"];
-        $editarGeneroController = new EditarGeneroController();
-        $genero = $editarGeneroController->obtenerGenero($idGenero);
+            <?php
+                include "../../controlador/genero/EditarGeneroController.php";
+            ?>
+            <div class="container-fluid">
+                <form id="editarGeneroForm" target="editar.php" method="post">
 
-        if ($genero) {
-    ?>
-<form action="" method="post">
-    <input type="hidden" name="id" value="<?php echo htmlspecialchars($genero->getId()); ?>">
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" value="<?php echo htmlspecialchars($genero->getNombre()); ?>" required><br>
-    <label for="descripcion">Descripción:</label>
-    <textarea id="descripcion" name="descripcion" required><?php echo htmlspecialchars($genero->getDescripcion()); ?></textarea><br>
-    <button type="submit" name="editar">Guardar Cambios</button>
-</form>
-    <?php
-        } else {
-            echo "No se encontró el género.";
-        }
-    } elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editar"])) {
-        $id = $_POST["id"];
-        $nombre = $_POST["nombre"];
-        $descripcion = $_POST["descripcion"];
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input type="text" class="form-control" name="id" value="<?php echo $Genero->getId(); ?>" readonly>
+                    </div>
 
-        $editarGeneroController = new EditarGeneroController();
-        $editarGeneroController->actualizarGenero($id, $nombre, $descripcion);
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" name="nombre" value="<?php echo $Genero->getNombre(); ?>" required>
+                    </div>
 
-        echo "<p>Género actualizado correctamente.</p>";
-        // Opcionalmente, puedes redireccionar automáticamente después de un breve retraso
-        // header("refresh:3;url=listarGeneros.php");
-    } else {
-        echo "ID de género no proporcionado.";
-    }
-    ?>
+                    <div class="form-floating">
+                        <label for="descripcion">Descripción</label>
+                        <textarea class="form-control" placeholder="" name="descripcion" style="height: 100px"><?php echo $Genero->getDescripcion(); ?></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Editar Genero</button>
+                </form>
+                <br>
+                
+            </div>
+        </div>
+        <a href="listar.php"><button>Volver a Generos</button></a>
 </body>
-</html>
 
+</html>

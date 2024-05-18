@@ -1,21 +1,27 @@
 <?php
 require_once "../../modelo/genero.php";
 
-class EditarGeneroController
-{
-    public function obtenerGenero($id)
-    {
-        $genero = new Genero();
-        $genero->setId($id);
-        return $genero->obtenerGenero();
-    }
+  if (isset($_GET['id']) && !empty($_GET['id'])) {
+      $idgenero = $_GET['id'];
+      $genero = new Genero();
+   
 
-    public function actualizarGenero($id, $nombre, $descripcion)
-    {
-        $genero = new Genero();
-        $genero->setId($id);
-        $genero->setNombre($nombre);
-        $genero->setDescripcion($descripcion);
-        $genero->actualizarGenero();
-    }
-}
+  }
+
+  if (
+      isset($_POST['id'])
+      && isset($_POST['nombre'])
+      && isset($_POST['descripcion'])
+      
+  ) {
+      $genero = new Genero();
+
+      $genero->setId($_POST['id']);
+      $genero->setNombre($_POST['nombre']);
+      $genero->setDescripcion($_POST['descripcion']);
+      
+      echo $genero->actualizarGenero();
+  }
+
+
+?>

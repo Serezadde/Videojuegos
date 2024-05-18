@@ -39,33 +39,45 @@ class Genero
 
     public function actualizarGenero()
     {
-        try {
-            $queryUpdate = "CALL sp_videojuegos_genero_editar(:id, :nombre, :descripcion)";
+        try{
+ 
+            $queryUpdate = "CALL sp_videojuegos_genero_editar(:idgenero, :nombre, :descripcion)";
             $instanciaDB = $this->db->prepare($queryUpdate);
-            $instanciaDB->bindParam(":id", $this->id, PDO::PARAM_INT);
-            $instanciaDB->bindParam(":nombre", $this->nombre, PDO::PARAM_STR);
-            $instanciaDB->bindParam(":descripcion", $this->descripcion, PDO::PARAM_STR);
+
+            $instanciaDB->bindParam(":idgenero", $this->id);
+            $instanciaDB->bindParam(":nombre", $this->nombre);
+            $instanciaDB->bindParam(":descripcion", $this->descripcion);
+
+    
             $instanciaDB->execute();
+    
+            if ($instanciaDB) {
+                header("Location:listarGeneros.php");
+            } else {
+                echo "Ocurrió un error inesperado";
+            }
         } catch (Exception $ex) {
             echo "Ocurrió un error: " . $ex->getMessage();
+            return null;
         }
-    }
+    
+        
+    } 
+   
 
-    public function eliminarGenero()
+    function eliminarGenero()
     {
         try {
             $queryDelete = "CALL sp_videojuegos_genero_eliminar(:id)";
             $instanciaDB = $this->db->prepare($queryDelete);
             $instanciaDB->bindParam(":id", $this->id, PDO::PARAM_INT);
             $instanciaDB->execute();
-            if ($instanciaDB) {
-                header("Location: ../../vista/genero/listarGeneros.php");
-            } 
-            
+            echo "Género eliminado correctamente.";
         } catch (Exception $ex) {
             echo "Ocurrió un error: " . $ex->getMessage();
         }
     }
+    
 
     function obtenerListadoGeneros()
     {
@@ -87,23 +99,19 @@ class Genero
     function obtenerGenero()
     {
         try {
-            $querySelect = "CALL sp_videojuegos_genero_obtener_genero(:id)";
+            $querySelect = "CALL sp_videojuegos_genero_obtener_genero(:idGenero)";
             $instanciaDB = $this->db->prepare($querySelect);
-
+    
             $instanciaDB->bindParam(":idGenero", $this->id);
-
+    
             $instanciaDB->execute();
-
-            if ($instanciaDB) {
-                return $instanciaDB->fetchAll(PDO::FETCH_CLASS, "Genero")[0];
-            } else {
-                echo "Ocurrió un error inesperado";
-            }
+    
+            return $instanciaDB->fetchAll(PDO::FETCH_CLASS, "Genero")[0];
         } catch (Exception $ex) {
-            echo "Ocurrió un error: " . $ex->getMessage();
-            return null;
+            throw new Exception("Ocurrió un error: " . $ex->getMessage());
         }
     }
+    
  
     public function getId()
     {

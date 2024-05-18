@@ -2,31 +2,32 @@
 
 require_once "../../modelo/genero.php";
 
-class EditarGeneroController
+class BorrarGeneroController
 {
-    public function obtenerGenero($id)
-    {
-        $genero = new Genero();
-        $genero->setId($id);
-        return $genero->obtenerGenero();
-    }
-
-    public function actualizarGenero($id, $nombre, $descripcion)
-    {
-        $genero = new Genero();
-        $genero->setId($id);
-        $genero->setNombre($nombre);
-        $genero->setDescripcion($descripcion);
-        $genero->actualizarGenero();
-    }
-
     public function eliminarGenero($id)
     {
-        $genero = new Genero();
-        $genero->setId($id);
-        $genero->eliminarGenero();
+        try {
+            $genero = new Genero();
+            $genero->setId($id);
+            $genero->eliminarGenero();
+            header("Location: ../../vista/genero/listarGeneros.php");
+            exit(); // Asegura que el script se detenga después de redirigir
+        } catch (Exception $ex) {
+            echo "Ocurrió un error: " . $ex->getMessage();
+        }
     }
 }
 
+// Verificar si se ha enviado un ID para eliminar el género
+if (isset($_GET["id"])) {
+    $idGenero = $_GET["id"];
+    
+    // Crear una instancia del controlador y llamar a la función para eliminar el género
+    $borrarGeneroController = new BorrarGeneroController();
+    $borrarGeneroController->eliminarGenero($idGenero);
+} else {
+    echo "ID de género no proporcionado.";
+}
 
 ?>
+

@@ -5,10 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../../componentes/style.css">
 </head>
 <body>
-<?php
-        include "../../controlador/genero/BorrarGeneroController.php";
-    ?>
     <h1>Género borrado</h1>
-    <a href="listarGeneros.php"><button class="btn btn-primary">Volver a la lista de géneros</button></a>
+    <a href="../../vista/genero/listarGeneros.php"><button class="btn btn-primary">Volver a la lista de géneros</button></a>
 </body>
 </html>
