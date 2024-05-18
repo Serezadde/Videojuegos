@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 DELIMITER $$
 
 CREATE PROCEDURE sp_videojuegos_plataforma_eliminar(
@@ -24,3 +25,17 @@ END $$
 
 DELIMITER ;
 
+=======
+DELIMITER $$ 
+
+CREATE PROCEDURE sp_videojuegos_plataforma_eliminar(
+    IN id INT
+) 
+BEGIN
+
+    DELETE FROM plataformas WHERE plataformas.id=id;
+
+END$$ 
+
+DELIMITER ;
+>>>>>>> 130258f030f09aa059495cf1b1e026f3099215af
