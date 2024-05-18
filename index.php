@@ -13,6 +13,8 @@ include "componentes/head.php";
             <a href="vista/plataformas/listar.php"><button class="btn btn-primary">Plataformas </button></a>
             <a href="vista/juegos/listar.php"><button class="btn btn-primary">Juegos </button></a>
             <a href="vista/pedidos/listar.php"><button class="btn btn-primary">Pedidos</button></a>
+            <a href="vista/genero/listarGeneros.php" class="btn btn-primary">Ver Géneros</a>
+
         </div>
     </div>
 </body>

@@ -17,4 +17,4 @@ foreach ($listadoPlataformas as $plataforma) {
             </th>
         </tr>";
 }
-?>
+
