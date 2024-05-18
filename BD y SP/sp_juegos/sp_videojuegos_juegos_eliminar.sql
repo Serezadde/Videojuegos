@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 DELIMITER //
 
 CREATE PROCEDURE sp_videojuegos_juegos_eliminar (IN p_id INT)
@@ -23,3 +24,17 @@ BEGIN
 END //
 
 DELIMITER ;
+=======
+DELIMITER $$ 
+
+CREATE PROCEDURE sp_videojuegos_juegos_eliminar(
+    IN id INT
+) 
+BEGIN
+
+    DELETE FROM videojuegos WHERE videojuegos.id=id;
+
+END$$ 
+
+DELIMITER ;
+>>>>>>> b4ee6e143ab1f51b1bfff0a9911c13df74bc8fd6
