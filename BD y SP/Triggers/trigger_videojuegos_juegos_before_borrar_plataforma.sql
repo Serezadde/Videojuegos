@@ -19,8 +19,6 @@ BEGIN
         DELETE FROM juegos WHERE id = cur_juego_id;
     END LOOP;
     CLOSE cur;
-    
-    -- Eliminar las asociaciones en juegos_plataformas después de los juegos
     DELETE FROM juegos_plataformas WHERE id_plataforma = OLD.id;
 END //
 

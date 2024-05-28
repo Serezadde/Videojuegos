@@ -15,3 +15,26 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+/*
+DELIMITER //
+
+CREATE PROCEDURE eliminarGenero(
+    IN genero_id INT
+)
+BEGIN
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+
+    DELETE FROM generos WHERE id = genero_id;
+
+    COMMIT;
+END//
+
+DELIMITER ;
+*/

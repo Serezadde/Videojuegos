@@ -291,6 +291,19 @@ CREATE PROCEDURE sp_videojuegos_plataforma_seleccionar(
     IN idPlataforma INT
 )
 BEGIN
+    SELECT * FROM plataformas;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+-- O por ID
+
+CREATE PROCEDURE sp_videojuegos_plataforma_seleccionar_ID(
+    IN idPlataforma INT
+)
+BEGIN
     SELECT * FROM plataformas WHERE id = idPlataforma;
 END $$
 
